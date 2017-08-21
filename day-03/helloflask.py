@@ -1,4 +1,4 @@
-from flask import Flask 
+from flask import Flask, request
 from geometry.triangle import Triangle
 from geometry.square import Square
 from geometry.circle import Circle
@@ -14,9 +14,15 @@ def index():
 
 @application.route('/segitiga', methods=['GET', 'POST'])
 def triangleArea():
-	triArea = Triangle(10, 5)
+	bottom = int(request.args.get('bottom'))
+	height = int(request.args.get('height'))
+
+	# print bottom, height 
+	triArea = Triangle(bottom, height)
 	result = triArea.triangle_area()
-	return 'Luas segitiga jika alas = 10 dan tinggi = 5 adalah ' + str(result)
+	return 'Luas segitiga jika alas = ' + str(bottom) + ' dan tinggi = ' + str(height) + ' adalah ' + str(result)
+	# print result
+
 
 
 @application.route('/bujursangkar', methods=['GET', 'POST'])
